@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+
+}
+.leaflet-top {
+  display: none !important; /* Hide the top section of the Leaflet map */
+}

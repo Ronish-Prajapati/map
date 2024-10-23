@@ -1,0 +1,129 @@
+import React, { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import L from "leaflet";
+import { locations } from "./data"; // Import locations from data.js
+
+const boundaryCoordinates = [
+    [27.66763697313941, 85.35216675390043],
+    [27.668834225932258, 85.36098585696696],
+    [27.669765413480274, 85.36405430401932],
+    [27.672710954543454, 85.36506281473454],
+    [27.67058257157745, 85.36881790728114],
+    [27.671437730434246, 85.37765846819335],
+    [27.670050469344357, 85.37722931476964],
+    [27.668986257132115, 85.3786026057581],
+    [27.671912815812746, 85.38263664816742],
+    [27.670810614615583, 85.38585529892164],
+    [27.670677589589815, 85.39426670644795],
+    [27.672577931854274, 85.39598332018355],
+    [27.67371812136923, 85.39991007418558],
+    [27.676967596201084, 85.4030858096758],
+    [27.67774669567046, 85.405531984249],
+    [27.68230716654712, 85.40578947629702],
+    [27.68217415551162, 85.40559635725175],
+    [27.68432131385624, 85.40061817741856],
+    [27.697869075605247, 85.39890039664247],
+    [27.701495583406466, 85.39615775736505],
+    [27.700600949520645, 85.39541796651753],
+    [27.70063290085714, 85.3953638354799],
+    [27.70259789011064, 85.3928377202952],
+    [27.702086676785257, 85.38933724644683],
+    [27.700776681769398, 85.38818245097754],
+    [27.697230030946564, 85.38973420738868],
+    [27.696622934979043, 85.38679308762676],
+    [27.69595193029479, 85.38488045763073],
+    [27.69235719210412, 85.38486241395152],
+    [27.694134780669227, 85.38118326786362],
+    [27.69295042097213, 85.37801314056802],
+    [27.694428241816897, 85.37597997658506],
+    [27.690720217121513, 85.37581307506825],
+    [27.690464949918336, 85.37431096141704],
+    [27.692332417247417, 85.37182261153018],
+    [27.688825851424788, 85.37003221331064],
+    [27.688194388930736, 85.3676955920754],
+    [27.681449604154697, 85.35988156631977],
+    [27.682417009216024, 85.35701389480383],
+    [27.678103928862946, 85.35501107654702],
+    [27.676007790892243, 85.35624007861209],
+    [27.667699116874797, 85.352130139388],
+    [27.668841335141643, 85.36093040131355],
+  ];
+const MapWithDynamicIcons = () => {
+  const [zoomLevel, setZoomLevel] = useState(14); // Initial zoom level
+  const map = useMap();
+
+  // Dynamically create the custom icon based on zoom level
+  const createCustomIcon = (zoom) => {
+    const iconSize = zoom >= 15 ? [40, 40] : [20, 20]; // Adjust size based on zoom level
+    return L.icon({
+      iconUrl: "/path/to/custom-icon.png", // Set your custom icon URL here
+      iconSize: iconSize, // Dynamic size
+      iconAnchor: [20, 40], // Anchor point for the icon
+      popupAnchor: [0, -40], // Anchor point for the popup
+    });
+  };
+
+  useEffect(() => {
+    map.on("zoomend", () => {
+      setZoomLevel(map.getZoom());
+    });
+  }, [map]);
+
+  return (
+    <MapContainer
+      center={[27.675, 85.32]} // Set initial center coordinates
+      zoom={zoomLevel}
+      scrollWheelZoom={true}
+      style={{ height: "800px", width: "800px" }}
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+
+      {/* Dynamically create markers from the data */}
+      {locations.map((location, index) => (
+        <Marker
+          key={index}
+          position={location.position}
+          icon={createCustomIcon(zoomLevel)}
+        >
+          <Popup>
+            <div
+              style={{
+                textAlign: "center",
+                maxWidth: "250px",
+                overflow: "hidden",
+              }}
+            >
+              <img
+                src={location.imageUrl}
+                alt={location.name}
+                style={{
+                  width: "90%",
+                  maxHeight: "150px",
+                  height: "100%",
+                  borderRadius: "8px",
+                  objectFit: "cover",
+                  display: "block",
+                  margin: "0 auto",
+                }}
+              />
+              <h4 style={{ margin: "10px 0 5px" }}>{location.name}</h4>
+              <p style={{ fontSize: "14px", margin: "0" }}>{location.description}</p>
+              <a href="#">Get Direction</a>
+              <br />
+              <a href="#">More Info</a>
+            </div>
+          </Popup>
+        </Marker>
+      ))}
+      <Polygon
+             positions={boundaryCoordinates}
+         pathOptions={{ color: "blue", fillColor: "blue", fillOpacity: 0.2 }}
+         />
+    </MapContainer>
+  );
+};
+
+export default MapWithDynamicIcons;
