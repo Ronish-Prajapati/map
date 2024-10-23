@@ -4,10 +4,10 @@ import L from "leaflet";
 import "./App.css";
 import "leaflet-routing-machine";
 import 'leaflet/dist/leaflet.css';
-import iconUrl from './maps-and-flags.png';
+import iconUrl from './location.png';
 import { locations } from "./data"; // Import locations and boundary coordinates
 
-
+import renderMarkers from './RenderMarkers';
 const boundaryCoordinates = [
   [27.66763697313941, 85.35216675390043],
   [27.668834225932258, 85.36098585696696],
@@ -148,10 +148,10 @@ function App() {
   const createCustomIcon = (zoom) => {
     let iconSize;
     if (zoom >= 15) {
-      iconSize = [30, 30]; // Zoom level 15 or more
+      iconSize = [25, 25]; // Zoom level 15 or more
     }
     else if(zoom>=14){
-      iconSize=[15,15];
+      iconSize=[30,30];
     } 
     else if (zoom >= 13) {
       iconSize = [15, 15]; // Zoom level 13 to 14
@@ -182,15 +182,16 @@ function App() {
         >
           {/* Tile layer for map display */}
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
+  url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+  attribution='&copy; <a href="https://carto.com/">CARTO</a>'
+/>
 
           {/* Component to handle zoom level changes */}
           <ZoomHandler setZoomLevel={setZoomLevel} />
+          {renderMarkers(zoomLevel, locations, createCustomIcon)}
 
           {/* Conditionally render markers only if zoom level is >= 12 */}
-          {zoomLevel >= 12 && locations.map((location, index,importance,info,direction) => (
+          {/* {zoomLevel >= 12 && locations.map((location, index) => (
             
             <Marker
               key={index}
@@ -226,7 +227,7 @@ function App() {
                 </div>
               </Popup>
             </Marker>
-          ))}
+          ))} */}
 
           {/* Polygon for a specific boundary */}
           <Polygon
@@ -238,7 +239,7 @@ function App() {
             }}
           />
 
-         {/* <Routing/> */}
+{/* {zoomLevel > 14 && <Routing />}  */}
         </MapContainer>
       </div>
     </>

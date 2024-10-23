@@ -2,10 +2,10 @@ export const locations = [
   {
     name: "Sankhadar chowk",
     position: [27.673457, 85.385284], // Example coordinates
-    imageUrl: "/assets/balkumari.jpg",
+    imageUrl: "/assets/shankhadar.jpg",
     description:
       "Balkumari Temple is a historical and cultural site located in Madhyapur Thimi, Nepal. It is famous for its beautiful architecture and rich cultural heritage.",
-    importance: "high",
+    importance:'high',
     direction: "",
     info: "",
   },
@@ -66,7 +66,7 @@ export const locations = [
   {
     name: "Prachanda Bhairav",
     position: [27.679129, 85.385697],
-    imageUrl: "/assets/balkumari.jpg",
+    imageUrl: "/assets/prachandabhairav.jpg",
     description:
       "Mahalaxmi Mandir is a revered temple in Nepal, known for its intricate designs.",
     importance: "medium",
@@ -80,7 +80,7 @@ export const locations = [
     imageUrl: "/assets/siddhikali.jpg",
     description:
       "Mahalaxmi Mandir is a revered temple in Nepal, known for its intricate designs.",
-    importance: "medium",
+    importance: "high",
     direction: "",
     info: "",
   },
@@ -102,7 +102,7 @@ export const locations = [
     imageUrl: "/assets/balkumari.jpg",
     description:
       "Mahalaxmi Mandir is a revered temple in Nepal, known for its intricate designs.",
-    importance: "medium",
+    importance: "high",
     direction: "",
     info: "",
   },
@@ -119,7 +119,7 @@ export const locations = [
   {
     name: "Gungachiwa",
     position: [27.682635, 85.387266],
-    imageUrl: "/assets/balkumari.jpg",
+    imageUrl: "/assets/gungachiwa.jpg",
     description:
       "Mahalaxmi Mandir is a revered temple in Nepal, known for its intricate designs.",
     importance: "medium",
@@ -129,17 +129,17 @@ export const locations = [
   {
     name: "Pati Bihar",
     position: [27.682069, 85.388478],
-    imageUrl: "/assets/balkumari.jpg",
+    imageUrl: "/assets/patibihar.jpg",
     description:
       "Mahalaxmi Mandir is a revered temple in Nepal, known for its intricate designs.",
-    importance: "medium",
+    importance: "high",
     direction: "",
     info: "",
   },
   {
     name: "Nagedesh Durbar",
     position: [27.683958, 85.385404],
-    imageUrl: "/assets/balkumari.jpg",
+    imageUrl: "/assets/nagadeshdurbar.jpg",
     description:
       "Mahalaxmi Mandir is a revered temple in Nepal, known for its intricate designs.",
     importance: "medium",
@@ -149,17 +149,17 @@ export const locations = [
   {
     name: "Siddhi Ganesh",
     position: [27.684129, 85.384334],
-    imageUrl: "/assets/balkumari.jpg",
+    imageUrl: "/assets/nagadeshganesh.jpg",
     description:
       "Mahalaxmi Mandir is a revered temple in Nepal, known for its intricate designs.",
-    importance: "medium",
+    importance: "high",
     direction: "",
     info: "",
   },
   {
     name: "Shileshwor Mahadev",
     position: [27.687437, 85.381451],
-    imageUrl: "/assets/balkumari.jpg",
+    imageUrl: "/assets/sileshwormahadev.jpg",
     description:
       "Mahalaxmi Mandir is a revered temple in Nepal, known for its intricate designs.",
     importance: "medium",
@@ -170,17 +170,17 @@ export const locations = [
   {
     name: "Kamal Pokhari",
     position: [27.691434, 85.385866],
-    imageUrl: "/assets/balkumari.jpg",
+    imageUrl: "/assets/kamalpokhari.jpg",
     description:
       "Mahalaxmi Mandir is a revered temple in Nepal, known for its intricate designs.",
-    importance: "medium",
+    importance: "high",
     direction: "",
     info: "",
   },
   {
     name: "Kumari Mandir",
     position: [27.691942, 85.38586],
-    imageUrl: "/assets/balkumari.jpg",
+    imageUrl: "/assets/kumari.jpg",
     description:
       "Mahalaxmi Mandir is a revered temple in Nepal, known for its intricate designs.",
     importance: "medium",
@@ -190,20 +190,10 @@ export const locations = [
   {
     name: "Bode Durbar",
     position: [27.691531, 85.386928],
-    imageUrl: "/assets/balkumari.jpg",
+    imageUrl: "/assets/bodedurbar.jpg",
     description:
       "Mahalaxmi Mandir is a revered temple in Nepal, known for its intricate designs.",
     importance: "medium",
-    direction: "",
-    info: "",
-  },
-  {
-    name: "Nilbarahi Temple",
-    position: [27.695421, 85.396399], // Example coordinates
-    imageUrl: "/assets/balkumari.jpg",
-    description:
-      "Nilbarahi Temple is a prominent religious site in Bhaktapur, Nepal, dedicated to Lord Barahi.",
-    importance: "high",
     direction: "",
     info: "",
   },
@@ -217,6 +207,17 @@ export const locations = [
     direction: "",
     info: "",
   },
+  {
+    name: "Nilbarahi Temple",
+    position: [27.695421, 85.396399], // Example coordinates
+    imageUrl: "/assets/nilbarahi.jpg",
+    description:
+      "Nilbarahi Temple is a prominent religious site in Bhaktapur, Nepal, dedicated to Lord Barahi.",
+    importance: "high",
+    direction: "",
+    info: "",
+  },
+  
 
   // Add more locations
 ];
