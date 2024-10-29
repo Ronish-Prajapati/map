@@ -214,7 +214,7 @@ function App() {
           center={position} // Set initial center coordinates
           zoom={zoomLevel}
           scrollWheelZoom={false}
-          style={{ height: "800px", width: "100%" }}
+          style={{ height: "600px", width: "100%" }}
         >
           {/* Tile layer for map display */}
           <TileLayer
