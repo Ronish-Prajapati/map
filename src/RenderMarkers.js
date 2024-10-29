@@ -1,6 +1,6 @@
 import React from "react";
 import { Marker, Popup } from "react-leaflet";
-import L from "leaflet";
+
 
 function renderMarkers(zoomLevel, locations, createCustomIcon) {
   // Filter locations based on zoom level and importance
@@ -40,12 +40,13 @@ function renderMarkers(zoomLevel, locations, createCustomIcon) {
               display: "block",
               margin: "0 auto",
             }}
+            // onerror="this.onerror=null; this.src='${plugins_url}/build/static/media/default-temple.jpg';"
           />
           <h4 style={{ margin: "10px 0 5px" }}>{location.name}</h4>
           <p style={{ fontSize: "14px", margin: "0" }}>{location.description}</p>
-          <a href={location.direction} style={{ padding: "2px" }}>Get Direction</a>
+          <a href={location.direction} style={{ padding: "2px",textDecoration:'none', fontSize:'15px'}}>Get Direction</a>
           <br />
-          <a href={location.info}>More Info</a>
+          <a href={location.info} style={{ padding: "2px",textDecoration:'none', fontSize:'15px'}}>More Info</a>
         </div>
       </Popup>
     </Marker>

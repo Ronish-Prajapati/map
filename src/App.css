@@ -43,6 +43,4 @@
   margin-top: 10px;
 
 }
-.leaflet-top {
-  display: none !important; /* Hide the top section of the Leaflet map */
-}
+
