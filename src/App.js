@@ -166,6 +166,24 @@ function App() {
 
     fetchLocations();
   }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setZoomLevel(13); // Smaller screen zoom level
+      } else {
+        setZoomLevel(14); // Larger screen zoom level
+      }
+    };
+
+    // Set initial zoom level based on screen size
+    handleResize();
+
+    // Add event listener for resize
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   if (isLoading) {
     return <div>Loading locations...</div>;
@@ -183,7 +201,7 @@ function App() {
     } else if (zoom >= 14) {
       iconSize = [30, 30];
     } else if (zoom >= 13) {
-      iconSize = [15, 15]; // Zoom level 13 to 14
+      iconSize = [20, 20]; // Zoom level 13 to 14
     } else if (zoom >= 11) {
       iconSize = [0, 0]; // Zoom level 11 to 12
     } else {

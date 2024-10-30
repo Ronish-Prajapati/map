@@ -5,9 +5,9 @@ import { Marker, Popup } from "react-leaflet";
 function renderMarkers(zoomLevel, locations, createCustomIcon) {
   // Filter locations based on zoom level and importance
   const filteredLocations = locations.filter((location) => {
-    if (zoomLevel === 14) {
+    if (zoomLevel === 14 || zoomLevel === 13) {
       return location.importance === "high"; // Only show high-importance locations at zoom 14
-    } else if (zoomLevel > 14) {
+    } else if (zoomLevel>13) {
       return true; // Show all locations at zoom level higher than 14
     }
     return false; // Don't show markers if zoom is less than 14
