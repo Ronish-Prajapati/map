@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -140,14 +140,33 @@ function ZoomHandler({ setZoomLevel }) {
 //   return null;
 // };
 
+
+function useMapResize(mapRef, mapHeight) {
+  useEffect(() => {
+    const resizeMap = () => {
+      if (mapRef.current) {
+        mapRef.current.invalidateSize();
+      }
+    };
+
+    resizeMap();
+    window.addEventListener('resize', resizeMap);
+
+    return () => window.removeEventListener('resize', resizeMap);
+  }, [mapRef, mapHeight]);
+}
+
+
 // Main App component
 function App() {
-  const [zoomLevel, setZoomLevel] = useState(14); // Initial zoom level
+ 
   const position = [27.684648411519873, 85.38485866820957]; // Initial map position
   const [locations, setLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [zoomLevel, setZoomLevel] = useState(14);
+  const [mapHeight, setMapHeight] = useState('500px');
+  const mapRef = useRef();
   useEffect(() => {
     const fetchLocations = async () => {
       try {
@@ -166,24 +185,26 @@ function App() {
 
     fetchLocations();
   }, []);
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setZoomLevel(13); // Smaller screen zoom level
+        setZoomLevel(13);
+        setMapHeight('300px'); // Adjust map height for smaller screens
       } else {
-        setZoomLevel(14); // Larger screen zoom level
+        setZoomLevel(14);
+        setMapHeight('500px'); // Adjust map height for larger screens
       }
     };
 
-    // Set initial zoom level based on screen size
     handleResize();
-
-    // Add event listener for resize
     window.addEventListener('resize', handleResize);
 
-    // Cleanup on component unmount
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  // Use the custom hook to handle map resizing
+  useMapResize(mapRef, mapHeight);
 
   if (isLoading) {
     return <div>Loading locations...</div>;
@@ -232,7 +253,10 @@ function App() {
           center={position} // Set initial center coordinates
           zoom={zoomLevel}
           scrollWheelZoom={false}
-          style={{ height: "500px", width: "100%" }}
+          style={{ height: mapHeight, width: "100%" }}
+          whenCreated={(mapInstance) => {
+            mapRef.current = mapInstance; // Store map instance
+          }}
         >
           {/* Tile layer for map display */}
           <TileLayer
