@@ -143,7 +143,7 @@ function ZoomHandler({ setZoomLevel }) {
 // Main App component
 function App() {
   const [zoomLevel, setZoomLevel] = useState(14); // Initial zoom level
-  const position = [27.680784692800028, 85.38313972654296]; // Initial map position
+  const position = [27.684648411519873, 85.38485866820957]; // Initial map position
   const [locations, setLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
