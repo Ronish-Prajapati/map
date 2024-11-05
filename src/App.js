@@ -12,7 +12,7 @@ import "leaflet/dist/leaflet.css";
 import iconUrl from "./location.png";
 
 
-import renderMarkers from "./RenderMarkers";
+import RenderMarkers from "./RenderMarkers";
 const boundaryCoordinates = [
   [27.66763697313941, 85.35216675390043],
   [27.668834225932258, 85.36098585696696],
@@ -57,6 +57,9 @@ const boundaryCoordinates = [
   [27.676007790892243, 85.35624007861209],
   [27.667699116874797, 85.352130139388],
   [27.668841335141643, 85.36093040131355],
+];
+const worldBounds = [
+  [90, -180], [90, 180], [-90, 180], [-90, -180]
 ];
 // ZoomHandler component to track zoom level
 function ZoomHandler({ setZoomLevel }) {
@@ -253,27 +256,39 @@ function App() {
           center={position} // Set initial center coordinates
           zoom={zoomLevel}
           scrollWheelZoom={false}
-          style={{ height: mapHeight, width: "100%" }}
-          whenCreated={(mapInstance) => {
-            mapRef.current = mapInstance; // Store map instance
-          }}
+          style={{ height: mapHeight, width: "100%"  }}
+         
         >
           {/* Tile layer for map display */}
           <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-            attribution='&copy; <a href="https://carto.com/">CARTO</a>'
+            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            fillColor="#2b2b2b"
           />
 
           {/* Component to handle zoom level changes */}
           <ZoomHandler setZoomLevel={setZoomLevel} />
-          {renderMarkers(zoomLevel, locations, createCustomIcon)}
+          {RenderMarkers(zoomLevel, locations, createCustomIcon,mapRef)}
+
+          <Polygon
+          positions={[worldBounds, boundaryCoordinates]}
+          pathOptions={{
+            color: "#2b2b2b",
+            fillColor: "#4b4b4b",
+            fillOpacity: 0.5, // Adjust opacity to control the visibility of map outside the boundary
+            interactive: false, // Make sure the mask does not interfere with map interactions
+          }}
+        />
 
           <Polygon
             positions={boundaryCoordinates} // Add your boundary coordinates here
             pathOptions={{
-              color: "black",
-              fillColor: "none",
-              // No blur inside polygon
+              color: "#1f4e79",
+              weight: 2,                    // Adjust thickness to make edges finer
+    smoothFactor: 1.5,            // Higher smoothFactor for smoother edges
+    fillColor: "transparent",     // Transparent fill for inside the polygon
+    opacity: 0.8,                 // Border opacity
+    dashArray: "3",               // Optional: create a soft, dashed effect
             }}
           />
 
