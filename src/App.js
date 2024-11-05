@@ -283,7 +283,7 @@ function App() {
           <Polygon
             positions={boundaryCoordinates} // Add your boundary coordinates here
             pathOptions={{
-              color: "#1f4e79",
+              color: "#add8e6",
               weight: 2,                    // Adjust thickness to make edges finer
     smoothFactor: 1.5,            // Higher smoothFactor for smoother edges
     fillColor: "transparent",     // Transparent fill for inside the polygon

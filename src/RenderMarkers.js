@@ -2,9 +2,11 @@ import React from "react";
 
 import { Marker, Popup } from "react-leaflet";
 import "./App.css";
+import icon from "./right-arrow.png";
 
 function RenderMarkers(zoomLevel, locations, createCustomIcon) {
   // Filter locations based on zoom level and importance
+
   const filteredLocations = locations.filter((location) => {
     if (zoomLevel === 14 || zoomLevel === 13) {
       return location.importance === "high"; // Only show high-importance locations at zoom 14
@@ -21,23 +23,44 @@ function RenderMarkers(zoomLevel, locations, createCustomIcon) {
       position={location.position}
       icon={createCustomIcon(zoomLevel)} // Dynamic icon based on zoom level
     >
-      <Popup>
+      <Popup
+        keepInView={true}
+        closeButton={true}
+        autoPan={true}
+        autoPanPadding={[150, 150]}
+        onOpen={(e) => {
+          const map = e.target._map; // Access the map instance associated with the popup
+
+          // Reset the view or center on the popup's location without reapplying padding
+          map.panTo(e.target.getLatLng(), { animate: true });
+        }}
+      >
         <div className="popup-container">
           <img
             src={location.imageUrl}
             alt={location.name}
-            className="popup-image"
+            className="popup-image popup-sm-image"
           />
-          <h4 style={{ margin: "10px 0 5px" }}>{location.name}</h4>
-          <p className="description" style={{ fontSize: "14px", margin: "0" }}>
-            {location.description}
-          </p>
+        </div>
+        <div style={{textAlign:"center"}}>
+          <a
+            href={location.info}
+            style={{ color: "#202124", textDecoration: "none" }}
+          >
+            <h4
+              style={{
+                margin: "5px 0 5px",
+                fontFamily: "Helvetica",
+                fontSize: "1.2rem",
+                
+              }}
+            >
+              {location.name}
+            </h4>
+          </a>
+
           <a href={location.direction} className="popup-link">
             Get Direction
-          </a>
-          <br />
-          <a href={location.info} className="popup-link">
-            More Info
           </a>
         </div>
       </Popup>
