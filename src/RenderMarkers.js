@@ -15,7 +15,7 @@ function RenderMarkers(zoomLevel, locations, createCustomIcon) {
     }
     return false; // Don't show markers if zoom is less than 14
   });
-
+  
   // Map through filtered locations and render markers
   return filteredLocations.map((location, index) => (
     <Marker
@@ -27,12 +27,12 @@ function RenderMarkers(zoomLevel, locations, createCustomIcon) {
         keepInView={true}
         closeButton={true}
         autoPan={true}
-        autoPanPadding={[150, 150]}
+        autoPanPadding={[120,120]}
         onOpen={(e) => {
           const map = e.target._map; // Access the map instance associated with the popup
 
           // Reset the view or center on the popup's location without reapplying padding
-          map.panTo(e.target.getLatLng(), { animate: true });
+          map.panTo(e.target.getLatLng(27.673457, 85.385284), { animate: true });
         }}
       >
         <div className="popup-container">
