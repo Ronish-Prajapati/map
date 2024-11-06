@@ -27,7 +27,7 @@ function RenderMarkers(zoomLevel, locations, createCustomIcon) {
         keepInView={true}
         closeButton={true}
         autoPan={true}
-        autoPanPadding={[120,120]}
+        autoPanPadding={[100,100]}
         onOpen={(e) => {
           const map = e.target._map; // Access the map instance associated with the popup
 
