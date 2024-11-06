@@ -196,7 +196,7 @@ function App() {
         setMapHeight('300px'); // Adjust map height for smaller screens
       } else {
         setZoomLevel(14);
-        setMapHeight('500px'); // Adjust map height for larger screens
+        setMapHeight('625px'); // Adjust map height for larger screens
       }
     };
 
