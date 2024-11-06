@@ -59,7 +59,7 @@ function RenderMarkers(zoomLevel, locations, createCustomIcon) {
             </h4>
           </a>
 
-          <a href={location.direction} className="popup-link">
+          <a  target="_blank" href={location.direction} className="popup-link">
             Get Direction
           </a>
         </div>
