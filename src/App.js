@@ -216,8 +216,10 @@ function App() {
   // Dynamically create the custom icon based on zoom level
   const createCustomIcon = (zoom) => {
     let iconSize;
-    if (zoom >= 15) {
+    if (zoom >= 16) {
       iconSize = [28, 28]; // Zoom level 15 or more
+    }else if (zoom >= 15) {
+      iconSize = [20, 20];
     } else if (zoom >= 14) {
       iconSize = [30, 30];
     } else if (zoom >= 13) {
@@ -240,6 +242,8 @@ function App() {
 
   return (
     <>
+    
+
       <div
         style={{
           display: "flex",
@@ -251,19 +255,27 @@ function App() {
           center={position} // Set initial center coordinates
           zoom={zoomLevel}
           scrollWheelZoom={false}
+         
           style={{ height: mapHeight, width: "100%" }}
         >
           {/* Tile layer for map display */}
           <TileLayer
             url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            fillColor="#2b2b2b"
+            fillColor="#3d3d3d"
           />
 
           {/* Component to handle zoom level changes */}
           <ZoomHandler setZoomLevel={setZoomLevel} />
+          {(zoomLevel === 13 || zoomLevel === 14) && (
+        <div className="ribbon-title "
+       >
+          
+मध्यपुर थिमिको नक्सा
+        </div>
+      )}
           {RenderMarkers(zoomLevel, locations, createCustomIcon, mapRef)}
-
+        
           <Polygon
             positions={[worldBounds, boundaryCoordinates]}
             pathOptions={{
@@ -279,14 +291,14 @@ function App() {
             pathOptions={{
               color: "#add8e6",
               weight: 2, // Adjust thickness to make edges finer
-              smoothFactor: 1.5, // Higher smoothFactor for smoother edges
+              smoothFactor: 2, // Higher smoothFactor for smoother edges
               fillColor: "transparent", // Transparent fill for inside the polygon
               opacity: 0.8, // Border opacity
               dashArray: "3", // Optional: create a soft, dashed effect
             }}
           />
 
-          {/* {zoomLevel > 14 && <Routing />}  */}
+           {/* {zoomLevel > 14 && <Routing />}   */}
         </MapContainer>
       </div>
     </>
