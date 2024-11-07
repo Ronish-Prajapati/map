@@ -103,8 +103,8 @@
 /* Ribbon Title Styling */
 .ribbon-title {
   position: absolute !important;
-  bottom: 20px !important;
-  right: 50% !important;
+  bottom: 10% !important;
+  right: 10% !important;
   padding: 10px 20px;
   background-color: #f0612a;
   color: white;
