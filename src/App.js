@@ -1,16 +1,10 @@
-import React, { useState, useEffect,useRef } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Polygon,
-  useMap,
-} from "react-leaflet";
+import React, { useState, useEffect, useRef } from "react";
+import { MapContainer, TileLayer, Polygon, useMap } from "react-leaflet";
 import L from "leaflet";
 import "./App.css";
 import "leaflet-routing-machine";
 import "leaflet/dist/leaflet.css";
 import iconUrl from "./location.png";
-
 
 import RenderMarkers from "./RenderMarkers";
 const boundaryCoordinates = [
@@ -59,7 +53,10 @@ const boundaryCoordinates = [
   [27.668841335141643, 85.36093040131355],
 ];
 const worldBounds = [
-  [90, -180], [90, 180], [-90, 180], [-90, -180]
+  [90, -180],
+  [90, 180],
+  [-90, 180],
+  [-90, -180],
 ];
 // ZoomHandler component to track zoom level
 function ZoomHandler({ setZoomLevel }) {
@@ -143,7 +140,6 @@ function ZoomHandler({ setZoomLevel }) {
 //   return null;
 // };
 
-
 function useMapResize(mapRef, mapHeight) {
   useEffect(() => {
     const resizeMap = () => {
@@ -153,29 +149,29 @@ function useMapResize(mapRef, mapHeight) {
     };
 
     resizeMap();
-    window.addEventListener('resize', resizeMap);
+    window.addEventListener("resize", resizeMap);
 
-    return () => window.removeEventListener('resize', resizeMap);
+    return () => window.removeEventListener("resize", resizeMap);
   }, [mapRef, mapHeight]);
 }
 
-
 // Main App component
 function App() {
- 
   const position = [27.684648411519873, 85.38485866820957]; // Initial map position
   const [locations, setLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [zoomLevel, setZoomLevel] = useState(14);
-  const [mapHeight, setMapHeight] = useState('500px');
+  const [mapHeight, setMapHeight] = useState("500px");
   const mapRef = useRef();
   useEffect(() => {
     const fetchLocations = async () => {
       try {
-        const response = await fetch('https://data-psi-six.vercel.app/locations.json');
+        const response = await fetch(
+          "https://data-psi-six.vercel.app/locations.json"
+        );
         if (!response.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error("Failed to fetch data");
         }
         const data = await response.json();
         setLocations(data.location);
@@ -193,17 +189,17 @@ function App() {
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setZoomLevel(13);
-        setMapHeight('300px'); // Adjust map height for smaller screens
+        setMapHeight("350px"); // Adjust map height for smaller screens
       } else {
         setZoomLevel(14);
-        setMapHeight('625px'); // Adjust map height for larger screens
+        setMapHeight("625px"); // Adjust map height for larger screens
       }
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Use the custom hook to handle map resizing
@@ -241,7 +237,6 @@ function App() {
       popupAnchor: popupAnchor, // Adjust popup based on icon size
     });
   };
- 
 
   return (
     <>
@@ -256,8 +251,7 @@ function App() {
           center={position} // Set initial center coordinates
           zoom={zoomLevel}
           scrollWheelZoom={false}
-          style={{ height: mapHeight, width: "100%"  }}
-         
+          style={{ height: mapHeight, width: "100%" }}
         >
           {/* Tile layer for map display */}
           <TileLayer
@@ -268,27 +262,27 @@ function App() {
 
           {/* Component to handle zoom level changes */}
           <ZoomHandler setZoomLevel={setZoomLevel} />
-          {RenderMarkers(zoomLevel, locations, createCustomIcon,mapRef)}
+          {RenderMarkers(zoomLevel, locations, createCustomIcon, mapRef)}
 
           <Polygon
-          positions={[worldBounds, boundaryCoordinates]}
-          pathOptions={{
-            color: "#2b2b2b",
-            fillColor: "#4b4b4b",
-            fillOpacity: 0.5, // Adjust opacity to control the visibility of map outside the boundary
-            interactive: false, // Make sure the mask does not interfere with map interactions
-          }}
-        />
+            positions={[worldBounds, boundaryCoordinates]}
+            pathOptions={{
+              color: "#2b2b2b",
+              fillColor: "#4b4b4b",
+              fillOpacity: 0.5, // Adjust opacity to control the visibility of map outside the boundary
+              interactive: false, // Make sure the mask does not interfere with map interactions
+            }}
+          />
 
           <Polygon
             positions={boundaryCoordinates} // Add your boundary coordinates here
             pathOptions={{
               color: "#add8e6",
-              weight: 2,                    // Adjust thickness to make edges finer
-    smoothFactor: 1.5,            // Higher smoothFactor for smoother edges
-    fillColor: "transparent",     // Transparent fill for inside the polygon
-    opacity: 0.8,                 // Border opacity
-    dashArray: "3",               // Optional: create a soft, dashed effect
+              weight: 2, // Adjust thickness to make edges finer
+              smoothFactor: 1.5, // Higher smoothFactor for smoother edges
+              fillColor: "transparent", // Transparent fill for inside the polygon
+              opacity: 0.8, // Border opacity
+              dashArray: "3", // Optional: create a soft, dashed effect
             }}
           />
 
