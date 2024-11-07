@@ -5,7 +5,7 @@ import "./App.css";
 import "leaflet-routing-machine";
 import "leaflet/dist/leaflet.css";
 import iconUrl from "./location.png";
-
+import Routing from "./Routing";
 import RenderMarkers from "./RenderMarkers";
 const boundaryCoordinates = [
   [27.66763697313941, 85.35216675390043],
@@ -95,47 +95,46 @@ function ZoomHandler({ setZoomLevel }) {
 //       showAlternatives: false,
 //       routeWhileDragging: false,
 //       show: false
-//     }).addTo(map);
+//      }).addTo(map);
 
-//     // Store a reference to the route line
+// //     // Store a reference to the route line
 //     let routeLine;
 
-//     // Update the route line when routes are found
-//     routingControl.on('routesfound', (e) => {
-//       const route = e.routes[0];
-//       routeLine = L.polyline(route.coordinates, {
-//         color: 'blue',
+// //      Update the route line when routes are found
+//      routingControl.on('routesfound', (e) => {
+//        const route = e.routes[0];
+//      routeLine = L.polyline(route.coordinates, {
+//          color: 'blue',
 //         weight: 2, // Set initial weight
 //         opacity: 0.6,
 //       }).addTo(map);
-//     });
+//      });
 
-//     // Function to update line weight based on zoom level
+//      // Function to update line weight based on zoom level
 //     const updateLineWeight = (zoom) => {
 //       if (routeLine) {
 //         const weight = zoom < 14 ? 2 : 2; // Set weight based on zoom level
 //         routeLine.setStyle({ weight }); // Update the polyline's weight
 //       }
-//     };
-
-//     // Update line weight when the zoom level changes
-//     map.on('zoomend', () => {
+//      };
+//    // Update line weight when the zoom level changes
+//      map.on('zoomend', () => {
 //       const zoom = map.getZoom();
 //       updateLineWeight(zoom);
-//     });
+//      });
 
-//     // Clean up routing control on component unmount
+//      // Clean up routing control on component unmount
 //     return () => {
 //       if (map && routingControl) {
 //         routingControl.getPlan().setWaypoints([]);
 //         map.removeControl(routingControl); // Cleanly remove the routing control
 //       }
-//       // Remove the route line if it exists
-//       if (routeLine) {
-//         map.removeLayer(routeLine);
+// //       // Remove the route line if it exists
+//        if (routeLine) {
+//        map.removeLayer(routeLine);
 //       }
 //     };
-//   }, [map]);
+//    }, [map]);
 
 //   return null;
 // };
@@ -270,8 +269,8 @@ function App() {
           {(zoomLevel === 13 || zoomLevel === 14) && (
         <div className="ribbon-title "
        >
-          
-मध्यपुर थिमिको नक्सा
+        मध्यपुर महाउत्सवको पद मार्ग
+
         </div>
       )}
           {RenderMarkers(zoomLevel, locations, createCustomIcon, mapRef)}
@@ -297,6 +296,8 @@ function App() {
               dashArray: "3", // Optional: create a soft, dashed effect
             }}
           />
+            {locations.length > 0 && <Routing zoomLevel={zoomLevel} locations={locations} />
+          }
 
            {/* {zoomLevel > 14 && <Routing />}   */}
         </MapContainer>
