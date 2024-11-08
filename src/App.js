@@ -269,8 +269,8 @@ function App() {
           {(zoomLevel === 13 || zoomLevel === 14) && (
         <div className="ribbon-title "
        >
-        मध्यपुर महाउत्सवको पद मार्ग
-
+<a target="_blank"  className="map-link" href="https://www.google.com/maps/d/u/0/viewer?mid=1Jv6Egig4t6cuWOwBGvCRYcdi0ZAiHRo&ll=27.671928429666217%2C85.45999601011516&z=13"> मध्यपुर महाउत्सवको पद मार्ग
+</a>
         </div>
       )}
           {RenderMarkers(zoomLevel, locations, createCustomIcon, mapRef)}

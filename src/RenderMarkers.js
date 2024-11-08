@@ -44,6 +44,7 @@ function RenderMarkers(zoomLevel, locations, createCustomIcon) {
         </div>
         <div style={{textAlign:"center"}}>
           <a
+          target="_blank" 
             href={location.info}
             style={{ color: "#202124", textDecoration: "none" }}
           >
