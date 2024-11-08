@@ -217,7 +217,7 @@ function App() {
     let iconSize;
     if (zoom >= 16) {
       iconSize = [28, 28]; // Zoom level 15 or more
-    }else if (zoom >= 15) {
+    } else if (zoom >= 15) {
       iconSize = [20, 20];
     } else if (zoom >= 14) {
       iconSize = [30, 30];
@@ -241,8 +241,6 @@ function App() {
 
   return (
     <>
-    
-
       <div
         style={{
           display: "flex",
@@ -254,7 +252,6 @@ function App() {
           center={position} // Set initial center coordinates
           zoom={zoomLevel}
           scrollWheelZoom={false}
-         
           style={{ height: mapHeight, width: "100%" }}
         >
           {/* Tile layer for map display */}
@@ -267,14 +264,19 @@ function App() {
           {/* Component to handle zoom level changes */}
           <ZoomHandler setZoomLevel={setZoomLevel} />
           {(zoomLevel === 13 || zoomLevel === 14) && (
-        <div className="ribbon-title "
-       >
-<a target="_blank"  className="map-link" href="https://www.google.com/maps/d/u/0/viewer?mid=1Jv6Egig4t6cuWOwBGvCRYcdi0ZAiHRo&ll=27.671928429666217%2C85.45999601011516&z=13"> मध्यपुर महाउत्सवको पद मार्ग
-</a>
-        </div>
-      )}
+            <div className="ribbon-title ">
+              <a
+                target="_blank"
+                className="map-link"
+                href="https://www.google.com/maps/d/u/0/viewer?mid=1Jv6Egig4t6cuWOwBGvCRYcdi0ZAiHRo&ll=27.671928429666217%2C85.45999601011516&z=13"
+              >
+                {" "}
+                मध्यपुर महोत्सवको पद मार्ग
+              </a>
+            </div>
+          )}
           {RenderMarkers(zoomLevel, locations, createCustomIcon, mapRef)}
-        
+
           <Polygon
             positions={[worldBounds, boundaryCoordinates]}
             pathOptions={{
@@ -296,10 +298,11 @@ function App() {
               dashArray: "3", // Optional: create a soft, dashed effect
             }}
           />
-            {locations.length > 0 && <Routing zoomLevel={zoomLevel} locations={locations} />
-          }
+          {locations.length > 0 && (
+            <Routing zoomLevel={zoomLevel} locations={locations} />
+          )}
 
-           {/* {zoomLevel > 14 && <Routing />}   */}
+          {/* {zoomLevel > 14 && <Routing />}   */}
         </MapContainer>
       </div>
     </>
