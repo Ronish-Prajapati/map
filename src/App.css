@@ -131,10 +131,7 @@
 
 @media (max-width: 480px) {
   .ribbon-title {
-    font-size: 0.9em;
-    padding: 6px 12px;
-    bottom: 5% !important;
-    right: 50% !important;
+   display: none !important;
   }
 }
 .leaflet-routing-alternatives-container{
