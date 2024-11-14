@@ -189,7 +189,12 @@ function App() {
       if (window.innerWidth < 768) {
         setZoomLevel(13);
         setMapHeight("350px"); // Adjust map height for smaller screens
-      } else {
+      } 
+      else if(window.innerWidth<=625){
+        setZoomLevel(13);
+        setMapHeight("625px");
+      }
+      else {
         setZoomLevel(13);
         setMapHeight("625px"); // Adjust map height for larger screens
       }
